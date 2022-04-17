@@ -1,0 +1,9 @@
+name: PvPDistinguish
+main: me.preciouso.pvpdistinguish.PvpDistinguish
+version: 1.0.0
+author: Kyu
+api-version: 1.18
+commands:
+  givepvp:
+    description: Gives an item that enables pvp after a few seconds of holding
+    usage: /<command>
