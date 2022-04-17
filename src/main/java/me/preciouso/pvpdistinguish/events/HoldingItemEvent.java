@@ -52,7 +52,7 @@ public class HoldingItemEvent implements Listener {
                 holding.add(id);
 
                 // Create new runnable
-                new Countdown(5, plugin) {
+                new Countdown(3, plugin) {
                     @Override
                     public void count(int current) {
                         ItemStack item = e.getPlayer().getInventory().getItem(e.getNewSlot());
@@ -64,12 +64,9 @@ public class HoldingItemEvent implements Listener {
                                 PvpList.getList().addPvp(id);
                                 new Hider(HoldingItemEvent.this.plugin).unHidePvpPlayer(e.getPlayer());
                             }
-                        }
-
-                        // Didn't hold item for entire duration
-                        // TODO test swap item in inventory mode, dont change holding slots
-                        if (!(item != null && e.getPlayer().getInventory().getHeldItemSlot() == e.getNewSlot() && item.equals(ItemManager.getItem(ItemDirectory.PVPSTICK)))) {
-                            task.cancel();
+                        } else if (!(item != null && e.getPlayer().getInventory().getHeldItemSlot() == e.getNewSlot() && item.equals(ItemManager.getItem(ItemDirectory.PVPSTICK)))) {
+                            // Didn't hold item for entire duration
+							task.cancel();
                             holding.remove(id);
                             e.getPlayer().sendMessage("You had" + getTime() + "s left until you were in pvp :(");
                         }
